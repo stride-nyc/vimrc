@@ -128,6 +128,7 @@ let maplocalleader = ";"
 "#############################################################################
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='luna'
 " let g:airline_theme='one'
 " air-line
@@ -284,6 +285,16 @@ nnoremap <Leader>A :Alternative<CR>
 
 " Re-source vimrc
 map <leader>s :source ~/.vimrc<CR>
+
+" use <leader>nt to toggle the line number counting method
+function! g:NumberToggle()
+  if &relativenumber == 1
+     set norelativenumber
+  else
+     set relativenumber
+  endif
+endfunction
+nnoremap <leader>nt :call g:NumberToggle()<cr>
 
 "Copy yml key under the cursor"
 " nnoremap <Leader>k :call YMLToKey()<CR>
