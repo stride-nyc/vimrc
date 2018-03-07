@@ -283,9 +283,6 @@ map <F9> :StarscopeUpdate<cr>
 " Call the 'alternative' script
 nnoremap <Leader>A :Alternative<CR>
 
-" Map jj to escape
-inoremap jj <Esc>
-
 " Re-source vimrc
 map <leader>s :source ~/.vimrc<CR>
 
