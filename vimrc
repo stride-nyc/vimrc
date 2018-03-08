@@ -296,6 +296,9 @@ function! g:NumberToggle()
 endfunction
 nnoremap <leader>nt :call g:NumberToggle()<cr>
 
+"Use the system clipboard when copying to the buffer
+set clipboard=unnamed
+
 "Copy yml key under the cursor"
 " nnoremap <Leader>k :call YMLToKey()<CR>
 " function YMLToKey()
