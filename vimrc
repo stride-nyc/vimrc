@@ -25,8 +25,8 @@ Plugin 'DataWraith/auto_mkdir'                      " Allows you to save files i
 Plugin 'airblade/vim-gitgutter'                     " shows a git diff in the gutter (sign column) and stages/reverts hunks
 Plugin 'altercation/vim-colors-solarized'           " Solarized color theme
 Plugin 'rakr/vim-one'                               " One color theme
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'                    " more informative status/tabline
+Plugin 'vim-airline/vim-airline-themes'             " airline styling
 Plugin 'chrisbra/csv.vim'                           " Filetype plugin for csv files
 Plugin 'ervandew/supertab'                          " Perform all your vim insert mode completions with Tab
 Plugin 'godlygeek/csapprox'                         " dependency for Solarized
@@ -67,7 +67,6 @@ endif
 "#############################################################################
 set autoread                                    " Detect file changes refresh buffer
 set background=dark                             " Dark colored background
-" set background=light                             " Light colored background
 set backspace=indent,eol,start                  " Backspace of newlines
 set colorcolumn=101                             " Show vertical column
 set cursorline                                  " Highlight current line
@@ -79,8 +78,6 @@ set hlsearch                                    " Highlight matches to recent se
 set ignorecase                                  " Ignore case when searching
 set incsearch                                   " Use incremental search
 set laststatus=2                                " Use two rows for status line
-" set list                                        " Show invisible chars
-" set listchars=tab:\ \ ,trail:·                  " Show tabs and trailing whitespace only
 set listchars=trail:·                  " Show tabs and trailing whitespace only
 set nocompatible                                " Not compatible w/ vi
 set number                                      " Display line numbers
@@ -130,15 +127,12 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='luna'
-" let g:airline_theme='one'
-" air-line
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:ctrlp_user_command = {
     \ 'types': {
     \   1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
@@ -215,9 +209,6 @@ nmap <leader>b :CtrlPBuffer<CR>
 " split pane shortcut
 nnoremap <Leader>v :vs<cr>
 
-" Open Fugitive status buffer
-" nnoremap <Leader>g :Gstatus<CR>
-
 " Open and close the quickfix window
 map <leader>qo :copen<CR>
 map <leader>qq :cclose<CR>
@@ -262,10 +253,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Apply macros w/ Q
-" nnoremap Q @q
-" vnoremap Q :norm @q<cr>
-
 " Run tests
 map <leader>t :wa <bar> TestifyRunFocused<CR>
 nmap <leader>T :wa <bar> TestifyRunFile<CR>
@@ -299,12 +286,6 @@ nnoremap <leader>nt :call g:NumberToggle()<cr>
 "Use the system clipboard when copying to the buffer
 set clipboard=unnamed
 
-"Copy yml key under the cursor"
-" nnoremap <Leader>k :call YMLToKey()<CR>
-" function YMLToKey()
-  " execute '!~/Dropbox/developer_stuff/bin/yml_to_key key ' . expand('%:p') . ":" . line(".") . ' | xargs echo -n | pbcopy'
-" endfunction
-
 "#############################################################################
 " Autocommands
 "#############################################################################
@@ -324,18 +305,6 @@ au BufRead,BufNewFile *_spec.rb set syntax=ruby
 " Highlight JSON files as javascript
 autocmd BufRead,BufNewFile *.json set filetype=javascript
 
-" Highlight Jasmine fixture files as HTML
-" autocmd BufRead,BufNewFile *.jasmine_fixture set filetype=html
-
-" When viewing a git tree or blob, quickly move up to view parent
-" autocmd User fugitive
-  " \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  " \   nnoremap <buffer> .. :edit %:h<CR> |
-  " \ endif
-
-" Auto-clean fugitive buffers
-" autocmd BufReadPost fugitive://* set bufhidden=delete
-
 " Word wrap without line breaks for text files
 au BufRead,BufNewFile *.txt,*.md,*.markdown,*.rdoc set wrap linebreak nolist textwidth=0 wrapmargin=0
 
@@ -345,29 +314,5 @@ autocmd InsertLeave * write
 "#############################################################################
 " Color scheme
 "#############################################################################
-
-" The below is for the 'one' color scheme.
-
-" Credit joshdick
-" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-" if (empty($TMUX))
-  " if (has("nvim"))
-  " "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " endif
-  " "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  " "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  " if (has("termguicolors"))
-    " set termguicolors
-  " endif
-" endif
-
-" let g:one_allow_italics = 1 " italic for comments
-" colorscheme one
-
-" ----- end 'one' color scheme settings
 
 colorscheme solarized
